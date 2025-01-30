@@ -104,34 +104,21 @@ if __name__ == "__main__":
     # Define aiohttp routes
 routes = web.RouteTableDef()
 
-@routes.get("/", allow_head=True)
-async def root_route_handler(request):
-    return web.json_response("https://text-leech-bot-for-render.onrender.com/")
 
-async def web_server():
-    web_app = web.Application(client_max_size=30000000)
-    web_app.add_routes(routes)
-    return web_app
+app = web.Application()
+routes = web.RouteTableDef()
 
-async def start_bot():
-    await bot.start()
-    print("Bot is up and running")
+@routes.get("/")
+async def home(request):
+    return web.Response(text="Hello, Docker!")
 
-async def stop_bot():
-    await bot.stop()
+app.add_routes(routes)
 
-async def main():
-    if WEBHOOK:
-        # Start the web server
-        app_runner = web.AppRunner(await web_server())
-        await app_runner.setup()
-        site = web.TCPSite(app_runner, "0.0.0.0", PORT)
-        await site.start()
-        print(f"Web server started on port {PORT}")
+# Get the port from environment variables (default: 8080)
+PORT = int(os.getenv("PORT", 8080))
 
-    # Start the bot
-    await start_bot()
-    
+if __name__ == "__main__":
+    web.run_app(app, host="0.0.0.0", port=PORT)
     
     async def main():
         await PRO.start()
