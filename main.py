@@ -9,24 +9,25 @@ import tgcrypto
 from pyromod import listen
 import logging
 from tglogging import TelegramLogHandler
+from aiohttp import web
 
 # Config 
 class Config(object):
-    BOT_TOKEN = os.environ.get("BOT_TOKEN", "7012560594:AAELZ_keuc20IMp4hpSFGmoCjo_qAD1FI60")
-    API_ID = int(os.environ.get("API_ID",  "22100695"))
-    API_HASH = os.environ.get("API_HASH", "0e8f93300ccbbcd56066e6d790b0d3b2")
+    BOT_TOKEN = os.environ.get("BOT_TOKEN", "")
+    API_ID = int(os.environ.get("API_ID",  "23442913"))
+    API_HASH = os.environ.get("API_HASH", "864a97e16b4ff7dc65ff5e2d1549b4a2")
     DOWNLOAD_LOCATION = "./DOWNLOADS"
     SESSIONS = "./SESSIONS"
 
-    AUTH_USERS = os.environ.get('AUTH_USERS', '7441472352').split(',')
+    AUTH_USERS = os.environ.get('AUTH_USERS', '7841326954').split(',')
     for i in range(len(AUTH_USERS)):
         AUTH_USERS[i] = int(AUTH_USERS[i])
 
-    GROUPS = os.environ.get('GROUPS', '1002472087176').split(',')
+    GROUPS = os.environ.get('GROUPS', '-1002300391155').split(',')
     for i in range(len(GROUPS)):
         GROUPS[i] = int(GROUPS[i])
 
-    LOG_CH = os.environ.get("LOG_CH", "-1002059340064")
+    LOG_CH = os.environ.get("LOG_CH", "-1002381344447")
 
 # TelegramLogHandler is a custom handler which is inherited from an existing handler. ie, StreamHandler.
 logging.basicConfig(
