@@ -74,37 +74,6 @@ class Msg(object):
     CMD_MSG_2 = "<b>Uploading :- </b> `{file_name}`"
     RESTART_MSG = "✅ HI Bhai log\n✅ PATH CLEARED"
 
-# Prefixes
-prefixes = ["/", "~", "?", "!", "."]
-
-# Client
-plugins = dict(root="plugins")
-if __name__ == "__main__":
-    if not os.path.isdir(Config.DOWNLOAD_LOCATION):
-        os.makedirs(Config.DOWNLOAD_LOCATION)
-    if not os.path.isdir(Config.SESSIONS):
-        os.makedirs(Config.SESSIONS)
-
-    PRO = AFK(
-        "AFK-DL",
-        bot_token=Config.BOT_TOKEN,
-        api_id=Config.API_ID,
-        api_hash=Config.API_HASH,
-        sleep_threshold=120,
-        plugins=plugins,
-        workdir= f"{Config.SESSIONS}/",
-        workers= 2,
-    )
-
-    chat_id = []
-    for i, j in zip(Config.GROUPS, Config.AUTH_USERS):
-        chat_id.append(i)
-        chat_id.append(j)
-
-    # Define aiohttp routes
-routes = web.RouteTableDef()
-
-
 app = web.Application()
 routes = web.RouteTableDef()
 
@@ -120,20 +89,5 @@ PORT = int(os.getenv("PORT", 8080))
 if __name__ == "__main__":
     web.run_app(app, host="0.0.0.0", port=PORT)
     
-    async def main():
-        await PRO.start()
-        # h = await PRO.get_chat_member(chat_id= int(-1002381344447), user_id=7841326954)
-        # print(h)
-        bot_info = await PRO.get_me()
-        LOGGER.info(f"<--- @{bot_info.username} Started --->")
-        
-        for i in chat_id:
-            try:
-                await PRO.send_message(chat_id=i, text="**Bot Started! ♾ /pro **")
-            except Exception as d:
-                print(d)
-                continue
-        await idle()
-
     asyncio.get_event_loop().run_until_complete(main())
     LOGGER.info(f"<---Bot Stopped--->")
