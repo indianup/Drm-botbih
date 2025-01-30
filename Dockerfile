@@ -20,5 +20,5 @@ RUN apt -qq update && apt -qq install -y git wget pv jq python3-dev ffmpeg media
 RUN apt install ffmpeg
 RUN pip3 install -r requirements.txt
 CMD ["sh", "start.sh"]
-
+EXPOSE 8080
 #!git clone https://github.com/axiomatic-systems/Bento4.git && cd Bento4 && apt-get -y install cmake && mkdir cmakebuild && cd cmakebuild/ && cmake -DCMAKE_BUILD_TYPE=Release .. && make && make install
